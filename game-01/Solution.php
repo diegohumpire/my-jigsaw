@@ -54,17 +54,15 @@ class Solution
      */
     private function solveThis(int $sum, array $numbers = [])
     {
-        $numbers = $this->filterUnderSumValue($numbers, $sum);
-        sort($numbers);
+        $numbersFiltered = $this->filterUnderSumValue($numbers, $sum);
         $firstNumber = 0;
         $secondNumber = 0;
 
-        for ($i = 0; $i < count($numbers); $i++) {
-            $firstNumber = $numbers[$i];
+        for ($i = 0; $i < count($numbersFiltered); $i++) {
+            $firstNumber = $numbersFiltered[$i];
             $diff = $sum - $firstNumber;
-            $keySecondNumber = array_search($diff, $numbers);
-            if ($keySecondNumber) {
-                $secondNumber = $numbers[$keySecondNumber];
+            if (in_array($diff, $numbersFiltered)) {
+                $secondNumber = $diff;
             }
         }
 
@@ -84,9 +82,9 @@ class Solution
      */
     private function filterUnderSumValue(array $numbers, int $sum): array
     {
-        return array_filter($numbers, function ($number) use ($sum) {
+        return array_values(array_filter($numbers, function ($number) use ($sum) {
             return $number < $sum;
-        });
+        }));
     }
 
     /**
