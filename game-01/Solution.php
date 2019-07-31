@@ -119,13 +119,11 @@ $solution = new Solution();
 $N = 450;
 $M = [5, 2, 8, 14, 0];
 /*
- * Uncomment this line if you want use a preset array
+ * Uncomment this line if you want use a preset array or yours.
+ * By default you can use a random generator array
  */
-// $solution->init($N, $M);
-/*
- * Or you can use a random generator array
- */
-$solution->init($N);
+// $solution->init($N);
+$solution->init($N, $M);
 
 // Script end
 function runtime($ru, $rus, $index)
