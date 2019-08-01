@@ -4,29 +4,20 @@
 namespace App\Categories;
 
 
-use App\Contracts\CanDecreaseSellIn;
-use App\Contracts\CanIncreaseQuality;
-use App\Item;
-use App\Traits\DecreaseSellIn;
-use App\Traits\IncreaseQuality;
+use App\Contracts\ItemContract;
 
-class AgedBrie extends Item implements
-    CanIncreaseQuality,
-    CanDecreaseSellIn
+class AgedBrie extends Category
 {
     const INCREASE = 2;
 
-    use IncreaseQuality;
-    use DecreaseSellIn;
-
-    public function tick()
+    public function applyTick(ItemContract $item)
     {
-        if ($this->sellIn <= 0) {
-            $this->increaseQuality(self::INCREASE);
+        if ($item->getSellIn() <= 0) {
+            $item->increaseQuality(self::INCREASE);
         } else {
-            $this->increaseQuality();
+            $item->increaseQuality();
         }
 
-        $this->decreaseSellIn();
+        $item->decreaseSellIn();
     }
 }

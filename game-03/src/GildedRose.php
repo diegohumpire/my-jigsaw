@@ -12,10 +12,6 @@ class GildedRose
      */
     public static function of($name, $quality, $sellIn): Item
     {
-        // Is in map: Return specific Item
-        // Is not in map: Return Generic Item
-        $class = (new ItemFactory())->getClass($name);
-
-        return new $class($name, $quality, $sellIn);
+        return new Item($name, $quality, $sellIn);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Item;
+use App\Category;
 use App\GildedRose;
 
 /*

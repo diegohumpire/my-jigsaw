@@ -6,11 +6,12 @@ namespace App;
 
 use App\Categories\AgedBrie;
 use App\Categories\Backstage;
+use App\Categories\Category;
 use App\Categories\Conjured;
-use App\Categories\GenericItem;
-use App\Categories\Sulfuras;
+use App\Categories\Generic;
+use App\Categories\Legendary;
 
-class ItemFactory
+class CategoryFactory
 {
     private $map = [];
 
@@ -18,23 +19,29 @@ class ItemFactory
 
     public function __construct()
     {
+        /*
+         * Map
+         * -----------------
+         * Read like:
+         * Item => Category
+         */
         $itemsByCategory = [
             'Aged Brie' => AgedBrie::class,
-            'Sulfuras, Hand of Ragnaros' => Sulfuras::class,
+            'Sulfuras, Hand of Ragnaros' => Legendary::class,
             'Backstage passes to a TAFKAL80ETC concert' => Backstage::class,
             'Conjured Mana Cake' => Conjured::class
         ];
 
         $this->map = $itemsByCategory;
-        $this->genericItemCategoryClass = GenericItem::class;
+        $this->genericItemCategoryClass = Generic::class;
     }
 
-    public function getClass(string $name): string
+    public function getCategoryInstance(string $name): Category
     {
         if (!key_exists($name, $this->map)) {
-            return $this->genericItemCategoryClass;
+            return new $this->genericItemCategoryClass();
         }
 
-        return $this->map[$name];
+        return new $this->map[$name]();
     }
 }

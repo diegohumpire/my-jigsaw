@@ -6,5 +6,5 @@ namespace App\Contracts;
 
 interface CanDecreaseQuality
 {
-    public function decreaseQuality();
+    public function decreaseQuality(int $decrease = 1);
 }

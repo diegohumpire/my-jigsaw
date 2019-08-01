@@ -4,32 +4,27 @@
 namespace App\Categories;
 
 
-use App\Item;
-use App\Traits\DecreaseSellIn;
-use App\Traits\IncreaseQuality;
+use App\Contracts\ItemContract;
 
-class Backstage extends Item
+class Backstage extends Category
 {
-    use IncreaseQuality;
-    use DecreaseSellIn;
-
     const INCREASE_NEW = 1;
     const INCREASE_TWO = 2;
     const INCREASE_THREE = 3;
     const DEPRECATED_QUALITY = 0;
 
-    public function tick()
+    public function applyTick(ItemContract $item)
     {
-        if ($this->sellIn > 10) {
-            $this->increaseQuality(self::INCREASE_NEW);
-        } elseif ($this->sellIn <= 10 && $this->sellIn > 5) {
-            $this->increaseQuality(self::INCREASE_TWO);
-        } elseif ($this->sellIn <= 5 && $this->sellIn > 0) {
-            $this->increaseQuality(self::INCREASE_THREE);
-        } elseif ($this->sellIn <= 0) {
-            $this->quality = self::DEPRECATED_QUALITY;
+        if ($item->getSellIn() > 10) {
+            $item->increaseQuality(self::INCREASE_NEW);
+        } elseif ($item->getSellIn() <= 10 && $item->getSellIn() > 5) {
+            $item->increaseQuality(self::INCREASE_TWO);
+        } elseif ($item->getSellIn() <= 5 && $item->getSellIn() > 0) {
+            $item->increaseQuality(self::INCREASE_THREE);
+        } elseif ($item->getSellIn() <= 0) {
+            $item->setQuality(self::DEPRECATED_QUALITY);
         }
 
-        $this->decreaseSellIn();
+        $item->decreaseSellIn();
     }
 }

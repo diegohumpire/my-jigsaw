@@ -6,5 +6,5 @@ namespace App\Contracts;
 
 interface CanIncreaseQuality
 {
-    public function increaseQuality();
+    public function increaseQuality(int $increase = 1);
 }
