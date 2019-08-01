@@ -13,6 +13,11 @@ use App\Traits\IncreaseSellIn;
 final class Item implements
     ItemContract
 {
+    /**
+     * I choose Traits because is a advantage that PHP offer us, but probably is not a SOLID principle.
+     *
+     * If we want to remove this traits, we need to remove them and copy all functions on this class
+     */
     use DecreaseSellIn, DecreaseQuality, IncreaseQuality, IncreaseSellIn;
 
     public $name;
