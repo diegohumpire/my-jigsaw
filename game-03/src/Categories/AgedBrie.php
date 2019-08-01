@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Items;
+namespace App\Categories;
 
 
 use App\Contracts\CanDecreaseSellIn;

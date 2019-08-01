@@ -14,7 +14,7 @@ class GildedRose
     {
         // Is in map: Return specific Item
         // Is not in map: Return Generic Item
-        $class = (new ItemMapper())->getClass($name);
+        $class = (new ItemFactory())->getClass($name);
 
         return new $class($name, $quality, $sellIn);
     }

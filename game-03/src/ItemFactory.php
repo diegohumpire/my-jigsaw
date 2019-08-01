@@ -4,36 +4,35 @@
 namespace App;
 
 
-use App\Items\AgedBrie;
-use App\Items\Backstage;
-use App\Items\Conjured;
-use App\Items\GenericItem;
-use App\Items\Sulfuras;
+use App\Categories\AgedBrie;
+use App\Categories\Backstage;
+use App\Categories\Conjured;
+use App\Categories\GenericItem;
+use App\Categories\Sulfuras;
 
-class ItemMapper
+class ItemFactory
 {
     private $map = [];
 
-    private $genericItemClass;
+    private $genericItemCategoryClass;
 
     public function __construct()
     {
-        $customItems = [
+        $itemsByCategory = [
             'Aged Brie' => AgedBrie::class,
             'Sulfuras, Hand of Ragnaros' => Sulfuras::class,
             'Backstage passes to a TAFKAL80ETC concert' => Backstage::class,
             'Conjured Mana Cake' => Conjured::class
         ];
 
-        $this->map = $customItems;
-
-        $this->genericItemClass = GenericItem::class;
+        $this->map = $itemsByCategory;
+        $this->genericItemCategoryClass = GenericItem::class;
     }
 
     public function getClass(string $name): string
     {
         if (!key_exists($name, $this->map)) {
-            return $this->genericItemClass;
+            return $this->genericItemCategoryClass;
         }
 
         return $this->map[$name];

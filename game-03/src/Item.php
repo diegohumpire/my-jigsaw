@@ -4,11 +4,6 @@
 namespace App;
 
 
-use App\Contracts\CanDecreaseQuality;
-use App\Contracts\CanDecreaseSellIn;
-use App\Traits\DecreaseQuality;
-use App\Traits\DecreaseSellIn;
-
 abstract class Item
 {
     public $name;
