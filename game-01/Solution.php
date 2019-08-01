@@ -60,9 +60,11 @@ class Solution
 
         for ($i = 0; $i < count($numbersFiltered); $i++) {
             $firstNumber = $numbersFiltered[$i];
+            unset($numbersFiltered[$i]);
             $diff = $sum - $firstNumber;
             if (in_array($diff, $numbersFiltered)) {
                 $secondNumber = $diff;
+                break;
             }
         }
 
@@ -116,14 +118,17 @@ class Solution
 }
 
 $solution = new Solution();
-$N = 450;
+// $N = 40;
+$N = 10;
 $M = [5, 2, 8, 14, 0];
 /*
  * Uncomment this line if you want use a preset array or yours.
  * By default you can use a random generator array
+ *
+ * You can change $N value too
  */
 // $solution->init($N);
-$solution->init($N, $M);
+$solution->init($N, $M); // You can change $N value too
 
 // Script end
 function runtime($ru, $rus, $index)
